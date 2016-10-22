@@ -1,0 +1,34 @@
+
+// para configurarlo PRENDER EL BT OPRIMIENDO EL BOTON ENTRA EN AT2..parpadea el led lento cambio de baud rate, name, master o slave etc
+// en AT1 TRABAJA 
+
+#include <SoftwareSerial.h>   // Incluimos la librería  SoftwareSerial  
+SoftwareSerial BT(10,11);    // Definimos los pines RX ARDUINO 10 y TX ARDUINO 11 VCC 5V GRND del Arduino conectados al Bluetooth
+ 
+void setup()
+{
+  BT.begin(38400);       // Inicializamos el puerto serie BT (Para Modo AT 2)
+  Serial.begin(9600);   // Inicializamos  el puerto serie  
+}
+ 
+void loop()
+{
+  //////////////////////////////////// CONFIGURACION POR TERMINAL
+//  if(BT.available())    // Si llega un dato por el puerto BT se envía al monitor serial
+//  {
+//    Serial.write(BT.read());
+//  }
+// 
+//  if(Serial.available())  // Si llega un dato por el monitor serial se envía al puerto BT
+//  {
+//     BT.write(Serial.read());
+//  }
+
+///////////////////////////////////////////////////////////////////////
+int sensorValue = analogRead(A0);
+int sensorValue1 = analogRead(A1);
+BT.write(sensorValue/4);
+BT.write(sensorValue1/4);
+delay(50);
+
+}
